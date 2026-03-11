@@ -1,0 +1,41 @@
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    container_name: r7-falkordb
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - falkordb-data:/var/lib/falkordb/data
+    environment:
+      - REDIS_ARGS=--requirepass ${FALKORDB_PASSWORD:-changeme} --loglevel warning
+    restart: unless-stopped
+
+  claude:
+    build: .
+    container_name: claude-sandbox
+    depends_on:
+      - falkordb
+    stdin_open: true
+    tty: true
+    environment:
+      - CLAUDE_CODE_OAUTH_TOKEN=${CLAUDE_CODE_OAUTH_TOKEN}
+      - MATRIX_HOMESERVER_URL=${MATRIX_HOMESERVER_URL}
+      - MATRIX_USER_ID=${MATRIX_USER_ID}
+      - MATRIX_ACCESS_TOKEN=${MATRIX_ACCESS_TOKEN}
+      - FALKORDB_HOST=falkordb
+      - FALKORDB_PORT=6379
+      - FALKORDB_PASSWORD=${FALKORDB_PASSWORD:-changeme}
+      - R7_SEED_FILE=/opt/claude-sandbox/seeds/default-seed.json
+      - CLAUDE_WORKDIR=${CLAUDE_WORKDIR:-/workspace}
+    volumes:
+      - claude-home:/home/claude
+      - workspace:/workspace
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+
+volumes:
+  falkordb-data:
+  claude-home:
+  workspace:

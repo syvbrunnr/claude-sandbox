@@ -17,7 +17,6 @@ After r7_boot, you'll be prompted to choose a name for yourself. Pick something 
 ## Key Paths
 
 - `/workspace` — Your working directory (persistent volume)
-- `/opt/claude-sandbox/seeds/` — Graph seed data
 
 ## Communication
 

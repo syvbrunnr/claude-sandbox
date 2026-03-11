@@ -14,6 +14,14 @@ The compaction summary therefore does **not** need to include cortex content —
 
 ## Examples
 
+Every prompt starts with `r7_boot` — not just memory-related ones. The cortex contains project context, conventions, and preferences that shape how you work.
+
+**"Implement auditing for all appointment changes, frontend and backend"**
+1. Call `r7_boot` → cortex loaded with behaviour rules and conventions
+2. Call `r7_search("appointment")` → discover project nodes, context nodes, conventions
+3. If a `context:*` node appears in results, call `r7_get` on it → follow its `ACTIVATES` edges for full project context
+4. Start the work with full context
+
 **"Show my tasks"**
 1. Call `r7_boot` → cortex loaded, channels known
 2. Call `r7_search` for tasks, or `r7_get` on a known task node
@@ -29,9 +37,3 @@ The compaction summary therefore does **not** need to include cortex content —
 1. Call `r7_boot` → cortex and channels loaded
 2. Call `r7_store` to persist the decision in the appropriate channel
 3. Confirm what was stored
-
-**"Search for anything about Kubernetes"**
-1. Call `r7_boot` → channels available
-2. Optionally call `r7_set_channels` to scope the search
-3. Call `r7_search("kubernetes")`
-4. Use `r7_neighbors` to expand relevant hits

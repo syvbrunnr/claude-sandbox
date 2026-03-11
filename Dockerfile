@@ -47,7 +47,6 @@ COPY vendor/matrix-mcp-server/ /opt/matrix-mcp-server/
 RUN cd /opt/matrix-mcp-server && npm ci && npm run build
 
 # Copy sandbox files
-COPY seeds/ /opt/claude-sandbox/seeds/
 COPY .claude/ /opt/claude-sandbox/.claude/
 COPY CLAUDE.md /opt/claude-sandbox/CLAUDE.md
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh

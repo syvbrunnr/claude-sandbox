@@ -55,7 +55,6 @@ config = {
                 "FALKORDB_HOST": os.environ.get("FALKORDB_HOST", "localhost"),
                 "FALKORDB_PORT": os.environ.get("FALKORDB_PORT", "6379"),
                 "FALKORDB_PASSWORD": os.environ.get("FALKORDB_PASSWORD", ""),
-                "R7_SEED_FILE": os.environ.get("R7_SEED_FILE", "/opt/claude-sandbox/seeds/default-seed.json"),
             }
         },
         "matrix-server": {

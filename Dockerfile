@@ -49,6 +49,7 @@ RUN cd /opt/matrix-mcp-server && npm ci && npm run build
 # Copy sandbox files
 COPY .claude/ /opt/claude-sandbox/.claude/
 COPY CLAUDE.md /opt/claude-sandbox/CLAUDE.md
+COPY --from=r7-builder /tmp/r7-mcp/seeds/ /opt/claude-sandbox/seeds/
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
